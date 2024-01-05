@@ -11,6 +11,7 @@ Public Class Form1
             If AuthenticateUser(username, password) Then
                 MessageBox.Show("Login Successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 MessageBox.Show("Hello")
+                'To do here
             Else
                 MessageBox.Show("Invalid username or password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If

@@ -8,10 +8,31 @@ Public Class Form1
         Dim password As String = txtPassword.Text
 
         Try
-            If AuthenticateUser(username, password) Then
+            Dim role As String = GetUserRole(username, password)
+
+            If role IsNot Nothing Then
                 MessageBox.Show("Login Successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                MessageBox.Show("Hello")
-                'To do here
+
+                ' Redirect based on role
+                Select Case role.ToLower()
+                    Case "admin"
+                        ' Redirect admin to admin dashboard
+                        MessageBox.Show("Welcome Admin!", "Dashboard", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        ' TODO: Redirect to admin dashboard form
+
+                    Case "teacher"
+                        ' Redirect teacher to teacher dashboard
+                        MessageBox.Show("Welcome Teacher!", "Dashboard", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        ' TODO: Redirect to teacher dashboard form
+
+                    Case "student"
+                        ' Redirect student to student dashboard
+                        MessageBox.Show("Welcome Student!", "Dashboard", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        ' TODO: Redirect to student dashboard form
+
+                    Case Else
+                        MessageBox.Show("Unknown role", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Select
             Else
                 MessageBox.Show("Invalid username or password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
@@ -20,15 +41,15 @@ Public Class Form1
         End Try
     End Sub
 
-    Private Function AuthenticateUser(username As String, password As String) As Boolean
+    Private Function GetUserRole(username As String, password As String) As String
         Using connection As New MySqlConnection(connectionString)
             connection.Open()
-            Dim query As String = "SELECT COUNT(*) FROM login WHERE Username = @Username AND Password = @Password"
+            Dim query As String = "SELECT Roles FROM login WHERE Username = @Username AND Password = @Password"
             Using cmd As New MySqlCommand(query, connection)
                 cmd.Parameters.AddWithValue("@Username", username)
                 cmd.Parameters.AddWithValue("@Password", password)
-                Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
-                Return count > 0
+                Dim role As Object = cmd.ExecuteScalar()
+                Return If(role IsNot Nothing, role.ToString(), Nothing)
             End Using
         End Using
     End Function

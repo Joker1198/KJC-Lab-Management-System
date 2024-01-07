@@ -18,7 +18,9 @@ Public Class Form1
                     Case "admin"
                         ' Redirect admin to admin dashboard
                         MessageBox.Show("Welcome Admin!", "Dashboard", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                        ' TODO: Redirect to admin dashboard form
+                        Me.Hide()
+                        AdminDashboard.Show()
+
 
                     Case "teacher"
                         ' Redirect teacher to teacher dashboard
@@ -44,12 +46,18 @@ Public Class Form1
     Private Function GetUserRole(username As String, password As String) As String
         Using connection As New MySqlConnection(connectionString)
             connection.Open()
-            Dim query As String = "SELECT Roles FROM login WHERE Username = @Username AND Password = @Password"
+            Dim query As String = "SELECT Role FROM login WHERE Username = @Username AND Password = @Password"
             Using cmd As New MySqlCommand(query, connection)
                 cmd.Parameters.AddWithValue("@Username", username)
                 cmd.Parameters.AddWithValue("@Password", password)
                 Dim role As Object = cmd.ExecuteScalar()
-                Return If(role IsNot Nothing, role.ToString(), Nothing)
+
+                ' Check for DBNull.Value before converting to string
+                If role IsNot DBNull.Value AndAlso role IsNot Nothing Then
+                    Return role.ToString()
+                Else
+                    Return Nothing
+                End If
             End Using
         End Using
     End Function

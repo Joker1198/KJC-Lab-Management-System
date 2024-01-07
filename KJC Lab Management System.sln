@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "KJC Lab Management System", "KJC Lab Management System\KJC Lab Management System.vbproj", "{99F3D3DF-5BE3-41CC-B34E-C1B819B4C7D9}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "KJC Lab Management System", "KJC Lab Management System\KJC Lab Management System.vbproj", "{99F3D3DF-5BE3-41CC-B34E-C1B819B4C7D9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A400FFB6-C1DE-4EBC-A9C2-A566AA7C72D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

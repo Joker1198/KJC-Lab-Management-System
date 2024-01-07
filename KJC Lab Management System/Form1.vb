@@ -1,7 +1,7 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class Form1
-    Dim connectionString As String = "Server=127.0.0.1;Database=kjclab;User Id=root;Password=;"
+    Public Shared connectionString As String = "Server=127.0.0.1;Database=kjclab;User Id=root;Password=;"
 
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
         Dim username As String = txtUsername.Text

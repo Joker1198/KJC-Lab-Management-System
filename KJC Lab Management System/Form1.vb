@@ -7,29 +7,38 @@ Public Class Form1
         Dim username As String = txtUsername.Text
         Dim password As String = txtPassword.Text
         Try
-            Dim role As String = GetUserRole(username, password)
+            Dim roleId As String = GetUserRole(username, password)
 
-            If role IsNot Nothing Then
+            If roleId IsNot Nothing Then
                 MessageBox.Show("Login Successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                 ' Redirect based on role
-                Select Case role.ToLower()
-                    Case "admin"
+                Select Case roleId.ToLower()
+                    Case "1"
                         ' Redirect admin to admin dashboard
                         MessageBox.Show("Welcome Admin!", "Dashboard", MessageBoxButtons.OK, MessageBoxIcon.Information)
                         Me.Hide()
                         AdminDashboard.Show()
 
+                    Case "2"
+                        ' Redirect lab admin to lab admin dashboard
+                        MessageBox.Show("Welcome Lab Admin!", "Dashboard", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        ' TODO: Redirect to lab admin dashboard form
 
-                    Case "teacher"
+                    Case "3"
                         ' Redirect teacher to teacher dashboard
                         MessageBox.Show("Welcome Teacher!", "Dashboard", MessageBoxButtons.OK, MessageBoxIcon.Information)
                         ' TODO: Redirect to teacher dashboard form
 
-                    Case "student"
+                    Case "4"
                         ' Redirect student to student dashboard
                         MessageBox.Show("Welcome Student!", "Dashboard", MessageBoxButtons.OK, MessageBoxIcon.Information)
                         ' TODO: Redirect to student dashboard form
+
+                    Case "5"
+                        ' Redirect HOD to HOD dashboard
+                        MessageBox.Show("Welcome HOD!", "Dashboard", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        ' TODO: Redirect to HOD dashboard form
 
                     Case Else
                         MessageBox.Show("Unknown role", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -42,18 +51,18 @@ Public Class Form1
         End Try
     End Sub
 
-    Private Function GetUserRole(username As String, password As String) As String
+    Private Function GetUserRole(userId As String, password As String) As String
         Using connection As New MySqlConnection(connectionString)
             connection.Open()
-            Dim query As String = "SELECT Role FROM login WHERE Username = @Username AND Password = @Password"
+            Dim query As String = "SELECT RoleId FROM userkjc WHERE UserId = @UserId AND Password = @Password"
             Using cmd As New MySqlCommand(query, connection)
-                cmd.Parameters.AddWithValue("@Username", username)
+                cmd.Parameters.AddWithValue("@UserId", userId)
                 cmd.Parameters.AddWithValue("@Password", password)
-                Dim role As Object = cmd.ExecuteScalar()
+                Dim roleId As Object = cmd.ExecuteScalar()
 
                 ' Check for DBNull.Value before converting to string
-                If role IsNot DBNull.Value AndAlso role IsNot Nothing Then
-                    Return role.ToString()
+                If roleId IsNot DBNull.Value AndAlso roleId IsNot Nothing Then
+                    Return roleId.ToString()
                 Else
                     Return Nothing
                 End If

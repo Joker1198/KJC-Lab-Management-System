@@ -6,7 +6,6 @@ Public Class Form1
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
         Dim username As String = txtUsername.Text
         Dim password As String = txtPassword.Text
-
         Try
             Dim roleId As String = GetUserRole(username, password)
 

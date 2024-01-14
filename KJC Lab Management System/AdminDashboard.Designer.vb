@@ -44,7 +44,7 @@ Partial Class AdminDashboard
         cmbdept = New ComboBox()
         btnDeleteUser = New Button()
         Label7 = New Label()
-        Button1 = New Button()
+        btnaddl = New Button()
         Button2 = New Button()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
@@ -61,7 +61,7 @@ Partial Class AdminDashboard
         ' lblWelcome
         ' 
         lblWelcome.AutoSize = True
-        lblWelcome.Location = New Point(352, 267)
+        lblWelcome.Location = New Point(305, 189)
         lblWelcome.Name = "lblWelcome"
         lblWelcome.Size = New Size(0, 15)
         lblWelcome.TabIndex = 1
@@ -77,7 +77,7 @@ Partial Class AdminDashboard
         ' 
         ' txtNewUsername
         ' 
-        txtNewUsername.Location = New Point(259, 160)
+        txtNewUsername.Location = New Point(212, 82)
         txtNewUsername.Name = "txtNewUsername"
         txtNewUsername.PlaceholderText = "College Mail"
         txtNewUsername.Size = New Size(200, 23)
@@ -85,7 +85,7 @@ Partial Class AdminDashboard
         ' 
         ' txtNewPassword
         ' 
-        txtNewPassword.Location = New Point(259, 189)
+        txtNewPassword.Location = New Point(212, 111)
         txtNewPassword.Name = "txtNewPassword"
         txtNewPassword.PlaceholderText = "Assign Password"
         txtNewPassword.Size = New Size(200, 23)
@@ -94,7 +94,7 @@ Partial Class AdminDashboard
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Location = New Point(187, 163)
+        Label1.Location = New Point(140, 85)
         Label1.Name = "Label1"
         Label1.Size = New Size(66, 15)
         Label1.TabIndex = 5
@@ -103,7 +103,7 @@ Partial Class AdminDashboard
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Location = New Point(190, 192)
+        Label2.Location = New Point(143, 114)
         Label2.Name = "Label2"
         Label2.Size = New Size(63, 15)
         Label2.TabIndex = 6
@@ -112,7 +112,7 @@ Partial Class AdminDashboard
         ' cmbNewRole
         ' 
         cmbNewRole.FormattingEnabled = True
-        cmbNewRole.Location = New Point(259, 335)
+        cmbNewRole.Location = New Point(212, 257)
         cmbNewRole.Name = "cmbNewRole"
         cmbNewRole.Size = New Size(200, 23)
         cmbNewRole.TabIndex = 7
@@ -120,7 +120,7 @@ Partial Class AdminDashboard
         ' Label3
         ' 
         Label3.AutoSize = True
-        Label3.Location = New Point(212, 338)
+        Label3.Location = New Point(165, 260)
         Label3.Name = "Label3"
         Label3.Size = New Size(41, 15)
         Label3.TabIndex = 8
@@ -128,7 +128,7 @@ Partial Class AdminDashboard
         ' 
         ' btnConfirmAddUser
         ' 
-        btnConfirmAddUser.Location = New Point(283, 380)
+        btnConfirmAddUser.Location = New Point(236, 302)
         btnConfirmAddUser.Name = "btnConfirmAddUser"
         btnConfirmAddUser.Size = New Size(153, 23)
         btnConfirmAddUser.TabIndex = 9
@@ -173,7 +173,7 @@ Partial Class AdminDashboard
         ' Label4
         ' 
         Label4.AutoSize = True
-        Label4.Location = New Point(190, 221)
+        Label4.Location = New Point(143, 143)
         Label4.Name = "Label4"
         Label4.Size = New Size(43, 15)
         Label4.TabIndex = 16
@@ -181,7 +181,7 @@ Partial Class AdminDashboard
         ' 
         ' UserIDT
         ' 
-        UserIDT.Location = New Point(259, 218)
+        UserIDT.Location = New Point(212, 140)
         UserIDT.Name = "UserIDT"
         UserIDT.PlaceholderText = "Assign User Id"
         UserIDT.Size = New Size(200, 23)
@@ -190,7 +190,7 @@ Partial Class AdminDashboard
         ' Label5
         ' 
         Label5.AutoSize = True
-        Label5.Location = New Point(212, 304)
+        Label5.Location = New Point(165, 226)
         Label5.Name = "Label5"
         Label5.Size = New Size(40, 15)
         Label5.TabIndex = 18
@@ -199,7 +199,7 @@ Partial Class AdminDashboard
         ' cmbcls
         ' 
         cmbcls.FormattingEnabled = True
-        cmbcls.Location = New Point(259, 301)
+        cmbcls.Location = New Point(212, 223)
         cmbcls.Name = "cmbcls"
         cmbcls.Size = New Size(200, 23)
         cmbcls.TabIndex = 17
@@ -207,7 +207,7 @@ Partial Class AdminDashboard
         ' Label6
         ' 
         Label6.AutoSize = True
-        Label6.Location = New Point(181, 268)
+        Label6.Location = New Point(134, 190)
         Label6.Name = "Label6"
         Label6.Size = New Size(76, 15)
         Label6.TabIndex = 20
@@ -216,7 +216,7 @@ Partial Class AdminDashboard
         ' cmbdept
         ' 
         cmbdept.FormattingEnabled = True
-        cmbdept.Location = New Point(259, 265)
+        cmbdept.Location = New Point(212, 187)
         cmbdept.Name = "cmbdept"
         cmbdept.Size = New Size(200, 23)
         cmbdept.TabIndex = 19
@@ -240,14 +240,14 @@ Partial Class AdminDashboard
         Label7.TabIndex = 22
         Label7.Text = "Admin Dashboard"
         ' 
-        ' Button1
+        ' btnaddl
         ' 
-        Button1.Location = New Point(35, 245)
-        Button1.Name = "Button1"
-        Button1.Size = New Size(90, 59)
-        Button1.TabIndex = 23
-        Button1.Text = "Add Lab"
-        Button1.UseVisualStyleBackColor = True
+        btnaddl.Location = New Point(35, 245)
+        btnaddl.Name = "btnaddl"
+        btnaddl.Size = New Size(90, 59)
+        btnaddl.TabIndex = 23
+        btnaddl.Text = "Add Lab"
+        btnaddl.UseVisualStyleBackColor = True
         ' 
         ' Button2
         ' 
@@ -264,7 +264,7 @@ Partial Class AdminDashboard
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1230, 566)
         Controls.Add(Button2)
-        Controls.Add(Button1)
+        Controls.Add(btnaddl)
         Controls.Add(Label7)
         Controls.Add(btnDeleteUser)
         Controls.Add(Label6)
@@ -316,6 +316,6 @@ Partial Class AdminDashboard
     Friend WithEvents cmbdept As ComboBox
     Friend WithEvents btnDeleteUser As Button
     Friend WithEvents Label7 As Label
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnaddl As Button
     Friend WithEvents Button2 As Button
 End Class

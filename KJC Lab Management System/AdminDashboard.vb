@@ -415,4 +415,10 @@ Public Class AdminDashboard
 
         Return departmentId
     End Function
+
+    'From here we'll work on lab now
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnaddl.Click
+        HideControls("txtNewUsername", "txtNewPassword", "cmbNewRole", "btnConfirmAddUser", "Label1", "Label2", "Label3", "UserIDT", "Label4", "cmbcls", "cmbdept", "Label6", "Label5")
+        HideControls("DataGridView1", "btnChangePassword", "btnChangeRole", "btnDeleteUser")
+    End Sub
 End Class

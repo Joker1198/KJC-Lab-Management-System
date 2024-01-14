@@ -34,17 +34,23 @@ Partial Class AdminDashboard
         btnConfirmAddUser = New Button()
         DataGridView1 = New DataGridView()
         VmUser = New Button()
-        btnDeleteUser = New Button()
         btnChangePassword = New Button()
         btnChangeRole = New Button()
+        Label4 = New Label()
+        UserIDT = New TextBox()
+        Label5 = New Label()
+        cmbcls = New ComboBox()
+        Label6 = New Label()
+        cmbdept = New ComboBox()
+        btnDeleteUser = New Button()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' btnLogout
         ' 
-        btnLogout.Location = New Point(700, 26)
+        btnLogout.Location = New Point(1089, 7)
         btnLogout.Name = "btnLogout"
-        btnLogout.Size = New Size(88, 28)
+        btnLogout.Size = New Size(129, 37)
         btnLogout.TabIndex = 0
         btnLogout.Text = "Logout"
         btnLogout.UseVisualStyleBackColor = True
@@ -94,7 +100,7 @@ Partial Class AdminDashboard
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Location = New Point(190, 142)
+        Label2.Location = New Point(190, 137)
         Label2.Name = "Label2"
         Label2.Size = New Size(63, 15)
         Label2.TabIndex = 6
@@ -103,7 +109,7 @@ Partial Class AdminDashboard
         ' cmbNewRole
         ' 
         cmbNewRole.FormattingEnabled = True
-        cmbNewRole.Location = New Point(259, 184)
+        cmbNewRole.Location = New Point(259, 335)
         cmbNewRole.Name = "cmbNewRole"
         cmbNewRole.Size = New Size(200, 23)
         cmbNewRole.TabIndex = 7
@@ -111,7 +117,7 @@ Partial Class AdminDashboard
         ' Label3
         ' 
         Label3.AutoSize = True
-        Label3.Location = New Point(212, 187)
+        Label3.Location = New Point(212, 338)
         Label3.Name = "Label3"
         Label3.Size = New Size(41, 15)
         Label3.TabIndex = 8
@@ -119,7 +125,7 @@ Partial Class AdminDashboard
         ' 
         ' btnConfirmAddUser
         ' 
-        btnConfirmAddUser.Location = New Point(281, 240)
+        btnConfirmAddUser.Location = New Point(259, 378)
         btnConfirmAddUser.Name = "btnConfirmAddUser"
         btnConfirmAddUser.Size = New Size(153, 23)
         btnConfirmAddUser.TabIndex = 9
@@ -129,9 +135,9 @@ Partial Class AdminDashboard
         ' DataGridView1
         ' 
         DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridView1.Location = New Point(440, 82)
+        DataGridView1.Location = New Point(768, 63)
         DataGridView1.Name = "DataGridView1"
-        DataGridView1.Size = New Size(348, 171)
+        DataGridView1.Size = New Size(450, 219)
         DataGridView1.TabIndex = 10
         ' 
         ' VmUser
@@ -143,41 +149,98 @@ Partial Class AdminDashboard
         VmUser.Text = "View/Manage Users"
         VmUser.UseVisualStyleBackColor = True
         ' 
-        ' btnDeleteUser
-        ' 
-        btnDeleteUser.Location = New Point(700, 204)
-        btnDeleteUser.Name = "btnDeleteUser"
-        btnDeleteUser.Size = New Size(90, 49)
-        btnDeleteUser.TabIndex = 12
-        btnDeleteUser.Text = "Delete User"
-        btnDeleteUser.UseVisualStyleBackColor = True
-        ' 
         ' btnChangePassword
         ' 
-        btnChangePassword.Location = New Point(700, 142)
+        btnChangePassword.Location = New Point(929, 288)
         btnChangePassword.Name = "btnChangePassword"
-        btnChangePassword.Size = New Size(90, 44)
+        btnChangePassword.Size = New Size(125, 46)
         btnChangePassword.TabIndex = 13
         btnChangePassword.Text = "Change Password"
         btnChangePassword.UseVisualStyleBackColor = True
         ' 
         ' btnChangeRole
         ' 
-        btnChangeRole.Location = New Point(700, 82)
+        btnChangeRole.Location = New Point(768, 288)
         btnChangeRole.Name = "btnChangeRole"
-        btnChangeRole.Size = New Size(90, 44)
+        btnChangeRole.Size = New Size(125, 46)
         btnChangeRole.TabIndex = 14
         btnChangeRole.Text = "Change Role"
         btnChangeRole.UseVisualStyleBackColor = True
+        ' 
+        ' Label4
+        ' 
+        Label4.AutoSize = True
+        Label4.Location = New Point(190, 197)
+        Label4.Name = "Label4"
+        Label4.Size = New Size(43, 15)
+        Label4.TabIndex = 16
+        Label4.Text = "User Id"
+        ' 
+        ' UserIDT
+        ' 
+        UserIDT.Location = New Point(259, 194)
+        UserIDT.Name = "UserIDT"
+        UserIDT.PlaceholderText = "Assign User Id"
+        UserIDT.Size = New Size(200, 23)
+        UserIDT.TabIndex = 15
+        ' 
+        ' Label5
+        ' 
+        Label5.AutoSize = True
+        Label5.Location = New Point(212, 304)
+        Label5.Name = "Label5"
+        Label5.Size = New Size(40, 15)
+        Label5.TabIndex = 18
+        Label5.Text = "Class :"
+        ' 
+        ' cmbcls
+        ' 
+        cmbcls.FormattingEnabled = True
+        cmbcls.Location = New Point(259, 301)
+        cmbcls.Name = "cmbcls"
+        cmbcls.Size = New Size(200, 23)
+        cmbcls.TabIndex = 17
+        ' 
+        ' Label6
+        ' 
+        Label6.AutoSize = True
+        Label6.Location = New Point(181, 268)
+        Label6.Name = "Label6"
+        Label6.Size = New Size(76, 15)
+        Label6.TabIndex = 20
+        Label6.Text = "Department :"
+        ' 
+        ' cmbdept
+        ' 
+        cmbdept.FormattingEnabled = True
+        cmbdept.Location = New Point(259, 265)
+        cmbdept.Name = "cmbdept"
+        cmbdept.Size = New Size(200, 23)
+        cmbdept.TabIndex = 19
+        ' 
+        ' btnDeleteUser
+        ' 
+        btnDeleteUser.Location = New Point(1089, 288)
+        btnDeleteUser.Name = "btnDeleteUser"
+        btnDeleteUser.Size = New Size(125, 46)
+        btnDeleteUser.TabIndex = 21
+        btnDeleteUser.Text = "Delete User"
+        btnDeleteUser.UseVisualStyleBackColor = True
         ' 
         ' AdminDashboard
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(800, 450)
+        ClientSize = New Size(1230, 566)
+        Controls.Add(btnDeleteUser)
+        Controls.Add(Label6)
+        Controls.Add(cmbdept)
+        Controls.Add(Label5)
+        Controls.Add(cmbcls)
+        Controls.Add(Label4)
+        Controls.Add(UserIDT)
         Controls.Add(btnChangeRole)
         Controls.Add(btnChangePassword)
-        Controls.Add(btnDeleteUser)
         Controls.Add(VmUser)
         Controls.Add(DataGridView1)
         Controls.Add(btnConfirmAddUser)
@@ -209,7 +272,13 @@ Partial Class AdminDashboard
     Friend WithEvents btnConfirmAddUser As Button
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents VmUser As Button
-    Friend WithEvents btnDeleteUser As Button
     Friend WithEvents btnChangePassword As Button
     Friend WithEvents btnChangeRole As Button
+    Friend WithEvents Label4 As Label
+    Friend WithEvents UserIDT As TextBox
+    Friend WithEvents Label5 As Label
+    Friend WithEvents cmbcls As ComboBox
+    Friend WithEvents Label6 As Label
+    Friend WithEvents cmbdept As ComboBox
+    Friend WithEvents btnDeleteUser As Button
 End Class

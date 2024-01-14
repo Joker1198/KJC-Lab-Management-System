@@ -1,4 +1,5 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports Microsoft.SqlServer
+Imports MySql.Data.MySqlClient
 
 Public Class AdminDashboard
     Private Sub HideControls(ParamArray controlNames As String())
@@ -22,14 +23,19 @@ Public Class AdminDashboard
         ' Load any initial data or setup here
         ' Add roles to the ComboBox
         cmbNewRole.Items.AddRange({"Admin", "Lab Admin", "Teacher", "Student", "HOD"})
+        ' Load departments to the ComboBox
+        LoadDepartments()
 
+        ' Load classes to the ComboBox
+        cmbcls.Items.AddRange(LoadClasses().ToArray())
         ' Hide the controls initially
-        HideControls("txtNewUsername", "txtNewPassword", "cmbNewRole", "btnConfirmAddUser", "Label1", "Label2", "Label3")
+        HideControls("txtNewUsername", "txtNewPassword", "cmbNewRole", "btnConfirmAddUser", "Label1", "Label2", "Label3", "UserIDT", "Label4", "cmbcls", "cmbdept", "Label6", "Label5")
+        HideControls("DataGridView1", "btnChangePassword", "btnChangeRole", "btnDeleteUser")
     End Sub
 
     Private Sub btnAddUsers_Click(sender As Object, e As EventArgs) Handles btnAddUsers.Click
         ' Show the controls for adding a new user
-        ShowControls("txtNewUsername", "txtNewPassword", "cmbNewRole", "btnConfirmAddUser", "Label1", "Label2", "Label3")
+        ShowControls("txtNewUsername", "txtNewPassword", "cmbNewRole", "btnConfirmAddUser", "Label1", "Label2", "Label3", "UserIDT", "Label4", "cmbcls", "cmbdept", "Label6", "Label5")
         HideControls("DataGridView1", "btnChangePassword", "btnChangeRole", "btnDeleteUser")
     End Sub
 
@@ -41,7 +47,7 @@ Public Class AdminDashboard
     Private Sub VmUser_Click(sender As Object, e As EventArgs) Handles VmUser.Click
         Try
             ' Display user data in the DataGridView
-            HideControls("txtNewUsername", "txtNewPassword", "cmbNewRole", "btnConfirmAddUser", "Label1", "Label2", "Label3")
+            HideControls("txtNewUsername", "txtNewPassword", "cmbNewRole", "btnConfirmAddUser", "Label1", "Label2", "Label3", "UserIDT", "Label4", "cmbcls", "cmbdept", "Label6", "Label5")
             ShowControls("DataGridView1", "btnChangePassword", "btnChangeRole", "btnDeleteUser")
             LoadUserData()
         Catch ex As Exception
@@ -74,6 +80,7 @@ Public Class AdminDashboard
         ' Get values from textboxes and ComboBox
         Dim newUsername As String = txtNewUsername.Text
         Dim newPassword As String = txtNewPassword.Text
+        Dim newUserID As String = UserIDT.Text
         Dim newRole As String = cmbNewRole.SelectedItem?.ToString() ' Use ?. to handle possible null
 
         ' Validate input (you can add more validation as needed)
@@ -88,7 +95,7 @@ Public Class AdminDashboard
                 connection.Open()
                 Dim insertQuery As String = "INSERT INTO UserKJC (UserId, UserName, Password, RoleId, RoleName) VALUES (@UserId, @UserName, @Password, @RoleId, @RoleName)"
                 Using cmd As New MySqlCommand(insertQuery, connection)
-                    cmd.Parameters.AddWithValue("@UserId", Guid.NewGuid().ToString()) ' Generate a unique UserId
+                    cmd.Parameters.AddWithValue("@UserId", newUserID)
                     cmd.Parameters.AddWithValue("@UserName", newUsername)
                     cmd.Parameters.AddWithValue("@Password", newPassword)
                     cmd.Parameters.AddWithValue("@RoleId", GetRoleIdByName(newRole)) ' Get RoleId from RoleName
@@ -100,7 +107,7 @@ Public Class AdminDashboard
             MessageBox.Show("User added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
             ' Hide the controls after adding a new user
-            HideControls("txtNewUsername", "txtNewPassword", "cmbNewRole", "btnConfirmAddUser", "Label1", "Label2", "Label3")
+            HideControls("txtNewUsername", "txtNewPassword", "cmbNewRole", "btnConfirmAddUser", "Label1", "Label2", "Label3", "UserIDT", "Label4", "cmbcls", "cmbdept", "Label6", "Label5")
 
             ' Clear textboxes and ComboBox after adding a new user
             txtNewUsername.Clear()
@@ -115,6 +122,35 @@ Public Class AdminDashboard
             MessageBox.Show("Error adding user: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
+    'loading class into cmb class
+    Private Function LoadClasses() As List(Of String)
+        Dim ClassName As New List(Of String)()
+
+        Try
+            ' Connect to the database
+            Using connection As New MySqlConnection(Form1.connectionString)
+                connection.Open()
+
+                ' Query to select class names
+                Dim query As String = "SELECT ClassName FROM Class"
+
+                ' Execute the query
+                Using cmd As New MySqlCommand(query, connection)
+                    Using reader As MySqlDataReader = cmd.ExecuteReader()
+                        While reader.Read()
+                            ' Add class names to the list
+                            ClassName.Add(reader("ClassName").ToString())
+                        End While
+                    End Using
+                End Using
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error loading class names: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+        Return ClassName
+    End Function
 
     Private Sub LoadUserData()
         Try
@@ -152,6 +188,34 @@ Public Class AdminDashboard
         End Try
 
         Return userData
+    End Function
+
+    'This is for loading Dept name into cmb
+    Private Function LoadDepartments() As List(Of String)
+        Dim DepartmentName As New List(Of String)()
+        Try
+            Using connection As New MySqlConnection(Form1.connectionString)
+                connection.Open()
+
+                ' Query to select department names
+                Dim query As String = "SELECT DepartmentName FROM Department"
+
+                ' Execute the query
+                Using cmd As New MySqlCommand(query, connection)
+                    Using reader As MySqlDataReader = cmd.ExecuteReader()
+                        ' Clear existing items in the ComboBox
+                        cmbdept.Items.Clear()
+
+                        ' Add department names to the ComboBox
+                        While reader.Read()
+                            cmbdept.Items.Add(reader("DepartmentName").ToString())
+                        End While
+                    End Using
+                End Using
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error loading departments: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Function
 
     Private Function GetRoleIdByName(roleName As String) As Integer
@@ -270,4 +334,85 @@ Public Class AdminDashboard
             MessageBox.Show("Please select a user to change the password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
     End Sub
+
+    Private Function GetClassesForDepartment(departmentName As String) As List(Of String)
+        Dim classes As New List(Of String)()
+
+        Try
+            ' Connect to the database
+            Using connection As New MySqlConnection(Form1.connectionString)
+                connection.Open()
+
+                ' Get the DepartmentId for the selected department
+                Dim departmentId As Integer = GetDepartmentIdByName(departmentName)
+
+                ' Query to select class names based on DepartmentId
+                Dim query As String = "SELECT ClassName FROM Class WHERE DepartmentId = @DepartmentId"
+
+                ' Execute the query
+                Using cmd As New MySqlCommand(query, connection)
+                    cmd.Parameters.AddWithValue("@DepartmentId", departmentId)
+                    Using reader As MySqlDataReader = cmd.ExecuteReader()
+                        While reader.Read()
+                            ' Add class names to the list
+                            classes.Add(reader("ClassName").ToString())
+                        End While
+                    End Using
+                End Using
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error loading class names: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+        Return classes
+    End Function
+
+    Private Sub cmbdept_SelectedIndexChanged(sender As Object, e As EventArgs)
+        ' Clear existing items in cmbcls
+        cmbcls.Items.Clear()
+
+        ' Get the selected department
+        Dim selectedDepartment = cmbdept.SelectedItem?.ToString
+
+        ' If a department is selected, load corresponding classes
+        If Not String.IsNullOrEmpty(selectedDepartment) Then
+            ' Fetch classes for the selected department from the database
+            Dim classes = GetClassesForDepartment(selectedDepartment)
+
+            ' Add classes to cmbcls
+            cmbcls.Items.AddRange(classes.ToArray)
+        End If
+    End Sub
+    Public Function GetDepartmentIdByName(departmentName As String) As Integer
+        Dim departmentId As Integer = -1 ' Default value if not found
+
+        ' Your database connection string
+        Dim connectionString As String = " Server=127.0.0.1;Database=kjclab;User Id=root;Password=;"
+
+        Try
+            Using connection As New MySqlConnection(connectionString)
+                connection.Open()
+
+                ' Query to select DepartmentId for the given department name
+                Dim query As String = "SELECT DepartmentId FROM Department WHERE DepartmentName = @DepartmentName"
+
+                Using cmd As New MySqlCommand(query, connection)
+                    cmd.Parameters.AddWithValue("@DepartmentName", departmentName)
+
+                    ' Execute the query
+                    Dim result As Object = cmd.ExecuteScalar()
+
+                    ' Check if the result is not DBNull
+                    If result IsNot DBNull.Value AndAlso result IsNot Nothing Then
+                        departmentId = Convert.ToInt32(result)
+                    End If
+                End Using
+            End Using
+        Catch ex As Exception
+            ' Handle exceptions, log, or display an error message
+            Console.WriteLine("Error fetching DepartmentId: " & ex.Message)
+        End Try
+
+        Return departmentId
+    End Function
 End Class

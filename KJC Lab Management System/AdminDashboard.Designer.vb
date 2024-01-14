@@ -43,6 +43,9 @@ Partial Class AdminDashboard
         Label6 = New Label()
         cmbdept = New ComboBox()
         btnDeleteUser = New Button()
+        Label7 = New Label()
+        Button1 = New Button()
+        Button2 = New Button()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -74,7 +77,7 @@ Partial Class AdminDashboard
         ' 
         ' txtNewUsername
         ' 
-        txtNewUsername.Location = New Point(259, 82)
+        txtNewUsername.Location = New Point(259, 160)
         txtNewUsername.Name = "txtNewUsername"
         txtNewUsername.PlaceholderText = "College Mail"
         txtNewUsername.Size = New Size(200, 23)
@@ -82,7 +85,7 @@ Partial Class AdminDashboard
         ' 
         ' txtNewPassword
         ' 
-        txtNewPassword.Location = New Point(259, 134)
+        txtNewPassword.Location = New Point(259, 189)
         txtNewPassword.Name = "txtNewPassword"
         txtNewPassword.PlaceholderText = "Assign Password"
         txtNewPassword.Size = New Size(200, 23)
@@ -91,7 +94,7 @@ Partial Class AdminDashboard
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Location = New Point(187, 85)
+        Label1.Location = New Point(187, 163)
         Label1.Name = "Label1"
         Label1.Size = New Size(66, 15)
         Label1.TabIndex = 5
@@ -100,7 +103,7 @@ Partial Class AdminDashboard
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Location = New Point(190, 137)
+        Label2.Location = New Point(190, 192)
         Label2.Name = "Label2"
         Label2.Size = New Size(63, 15)
         Label2.TabIndex = 6
@@ -142,7 +145,7 @@ Partial Class AdminDashboard
         ' 
         ' VmUser
         ' 
-        VmUser.Location = New Point(35, 175)
+        VmUser.Location = New Point(35, 160)
         VmUser.Name = "VmUser"
         VmUser.Size = New Size(90, 59)
         VmUser.TabIndex = 11
@@ -170,7 +173,7 @@ Partial Class AdminDashboard
         ' Label4
         ' 
         Label4.AutoSize = True
-        Label4.Location = New Point(190, 197)
+        Label4.Location = New Point(190, 221)
         Label4.Name = "Label4"
         Label4.Size = New Size(43, 15)
         Label4.TabIndex = 16
@@ -178,7 +181,7 @@ Partial Class AdminDashboard
         ' 
         ' UserIDT
         ' 
-        UserIDT.Location = New Point(259, 194)
+        UserIDT.Location = New Point(259, 218)
         UserIDT.Name = "UserIDT"
         UserIDT.PlaceholderText = "Assign User Id"
         UserIDT.Size = New Size(200, 23)
@@ -227,11 +230,42 @@ Partial Class AdminDashboard
         btnDeleteUser.Text = "Delete User"
         btnDeleteUser.UseVisualStyleBackColor = True
         ' 
+        ' Label7
+        ' 
+        Label7.AutoSize = True
+        Label7.Font = New Font("Times New Roman", 21.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label7.Location = New Point(486, 12)
+        Label7.Name = "Label7"
+        Label7.Size = New Size(239, 32)
+        Label7.TabIndex = 22
+        Label7.Text = "Admin Dashboard"
+        ' 
+        ' Button1
+        ' 
+        Button1.Location = New Point(35, 245)
+        Button1.Name = "Button1"
+        Button1.Size = New Size(90, 59)
+        Button1.TabIndex = 23
+        Button1.Text = "Add Lab"
+        Button1.UseVisualStyleBackColor = True
+        ' 
+        ' Button2
+        ' 
+        Button2.Location = New Point(35, 325)
+        Button2.Name = "Button2"
+        Button2.Size = New Size(90, 59)
+        Button2.TabIndex = 24
+        Button2.Text = "View/Manage Lab"
+        Button2.UseVisualStyleBackColor = True
+        ' 
         ' AdminDashboard
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1230, 566)
+        Controls.Add(Button2)
+        Controls.Add(Button1)
+        Controls.Add(Label7)
         Controls.Add(btnDeleteUser)
         Controls.Add(Label6)
         Controls.Add(cmbdept)
@@ -281,4 +315,7 @@ Partial Class AdminDashboard
     Friend WithEvents Label6 As Label
     Friend WithEvents cmbdept As ComboBox
     Friend WithEvents btnDeleteUser As Button
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Button2 As Button
 End Class

@@ -128,7 +128,7 @@ Partial Class AdminDashboard
         ' 
         ' btnConfirmAddUser
         ' 
-        btnConfirmAddUser.Location = New Point(259, 378)
+        btnConfirmAddUser.Location = New Point(283, 380)
         btnConfirmAddUser.Name = "btnConfirmAddUser"
         btnConfirmAddUser.Size = New Size(153, 23)
         btnConfirmAddUser.TabIndex = 9

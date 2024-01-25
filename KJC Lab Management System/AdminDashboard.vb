@@ -381,5 +381,141 @@ Public Class AdminDashboard
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnaddl.Click
         HideControls("txtNewUsername", "txtNewPassword", "cmbNewRole", "btnConfirmAddUser", "Label1", "Label2", "Label3", "UserIDT", "Label4", "cmbcls", "cmbdept", "Label6", "Label5")
         HideControls("DataGridView1", "btnChangePassword", "btnChangeRole", "btnDeleteUser")
+        LoadDepartmentsIntoComboBox(cmbdept1)
+
+        ' Load existing Lab Admins into AdminAsgn ComboBox
+        LoadLabAdminsIntoComboBox(AdminAsgn)
     End Sub
+    Private Sub cnfmlab_Click(sender As Object, e As EventArgs)
+        ' Call the method to confirm and add the lab
+        ConfirmAddLab()
+    End Sub
+
+    Private Sub ConfirmAddLab()
+        ' Get values from controls
+        Dim labName As String = labName
+        Dim selectedDepartment As String = cmbdept1.SelectedItem?.ToString()
+        Dim selectedLabAdmin As String = AdminAsgn.SelectedItem?.ToString()
+
+        ' Validate input (you can add more validation as needed)
+        If String.IsNullOrEmpty(labName) OrElse String.IsNullOrEmpty(selectedDepartment) OrElse String.IsNullOrEmpty(selectedLabAdmin) Then
+            MessageBox.Show("Please fill in all fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        ' Perform the final steps to add the lab to the database
+        Try
+            Using connection As New MySqlConnection(Form1.connectionString)
+                connection.Open()
+
+                ' Get DepartmentId for the selected department
+                Dim departmentId As Integer = GetDepartmentIdByName(selectedDepartment)
+
+                ' Get UserId for the selected Lab Admin
+                Dim labAdminUserId As String = GetUserIdByNameAndRole(selectedLabAdmin, "Lab Admin")
+
+                ' Insert the lab into the Lab table
+                Dim insertQuery As String = "INSERT INTO Lab (LabName, DepartmentId, LabAdminId) VALUES (@LabName, @DepartmentId, @LabAdminId)"
+                Using cmd As New MySqlCommand(insertQuery, connection)
+                    cmd.Parameters.AddWithValue("@LabName", labName)
+                    cmd.Parameters.AddWithValue("@DepartmentId", departmentId)
+                    cmd.Parameters.AddWithValue("@LabAdminId", labAdminUserId)
+                    cmd.ExecuteNonQuery()
+                End Using
+            End Using
+
+            MessageBox.Show("Lab added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+            ' Hide the controls after adding a new lab
+            HideControls("cmbdept1", "LabName", "AdminAsgn", "cnfmlab")
+
+            ' Clear textboxes and ComboBox after adding a new lab
+            cmbdept1.SelectedIndex = -1
+            AdminAsgn.SelectedIndex = -1
+        Catch ex As Exception
+            MessageBox.Show("Error adding lab: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub LoadDepartmentsIntoComboBox(comboBox As ComboBox)
+        Try
+            Using connection As New MySqlConnection(Form1.connectionString)
+                connection.Open()
+
+                ' Query to select department names
+                Dim query As String = "SELECT DepartmentName FROM Department"
+
+                ' Execute the query
+                Using cmd As New MySqlCommand(query, connection)
+                    Using reader As MySqlDataReader = cmd.ExecuteReader()
+                        ' Clear existing items in the ComboBox
+                        comboBox.Items.Clear()
+
+                        ' Add department names to the ComboBox
+                        While reader.Read()
+                            comboBox.Items.Add(reader("DepartmentName").ToString())
+                        End While
+                    End Using
+                End Using
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error loading departments: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub LoadLabAdminsIntoComboBox(comboBox As ComboBox)
+        Try
+            Using connection As New MySqlConnection(Form1.connectionString)
+                connection.Open()
+
+                ' Query to select Lab Admin names
+                Dim query As String = "SELECT UserName FROM UserKJC WHERE RoleName = 'Lab Admin'"
+
+                ' Execute the query
+                Using cmd As New MySqlCommand(query, connection)
+                    Using reader As MySqlDataReader = cmd.ExecuteReader()
+                        ' Clear existing items in the ComboBox
+                        comboBox.Items.Clear()
+
+                        ' Add Lab Admin names to the ComboBox
+                        While reader.Read()
+                            comboBox.Items.Add(reader("UserName").ToString())
+                        End While
+                    End Using
+                End Using
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error loading Lab Admins: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Function GetUserIdByNameAndRole(userName As String, roleName As String) As String
+        Dim userId As String = ""
+
+        Try
+            Using connection As New MySqlConnection(Form1.connectionString)
+                connection.Open()
+
+                ' Query to select UserId for the given username and role
+                Dim query As String = "SELECT UserId FROM UserKJC WHERE UserName = @UserName AND RoleName = @RoleName"
+
+                Using cmd As New MySqlCommand(query, connection)
+                    cmd.Parameters.AddWithValue("@UserName", userName)
+                    cmd.Parameters.AddWithValue("@RoleName", roleName)
+
+                    ' Execute the query
+                    Dim result As Object = cmd.ExecuteScalar()
+
+                    ' Check if the result is not DBNull
+                    If result IsNot DBNull.Value AndAlso result IsNot Nothing Then
+                        userId = result.ToString()
+                    End If
+                End Using
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error fetching UserId: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+        Return userId
+    End Function
 End Class

@@ -44,6 +44,13 @@ Partial Class AdminDashboard
         Label7 = New Label()
         btnaddl = New Button()
         Button2 = New Button()
+        cmbdept1 = New ComboBox()
+        Label5 = New Label()
+        s = New TextBox()
+        Label8 = New Label()
+        Label9 = New Label()
+        AdminAsgn = New ComboBox()
+        cnfmlab = New Button()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -239,11 +246,78 @@ Partial Class AdminDashboard
         Button2.Text = "View/Manage Lab"
         Button2.UseVisualStyleBackColor = True
         ' 
+        ' cmbdept1
+        ' 
+        cmbdept1.FormattingEnabled = True
+        cmbdept1.Location = New Point(525, 82)
+        cmbdept1.Name = "cmbdept1"
+        cmbdept1.Size = New Size(200, 23)
+        cmbdept1.TabIndex = 25
+        ' 
+        ' Label5
+        ' 
+        Label5.AutoSize = True
+        Label5.Location = New Point(443, 85)
+        Label5.Name = "Label5"
+        Label5.Size = New Size(76, 15)
+        Label5.TabIndex = 26
+        Label5.Text = "Department :"
+        ' 
+        ' s
+        ' 
+        s.Location = New Point(525, 140)
+        s.Name = "s"
+        s.PlaceholderText = "Assign Lab Name"
+        s.Size = New Size(200, 23)
+        s.TabIndex = 27
+        ' 
+        ' Label8
+        ' 
+        Label8.AutoSize = True
+        Label8.Location = New Point(452, 143)
+        Label8.Name = "Label8"
+        Label8.Size = New Size(67, 15)
+        Label8.TabIndex = 28
+        Label8.Text = "Lab Name :"
+        ' 
+        ' Label9
+        ' 
+        Label9.AutoSize = True
+        Label9.Location = New Point(443, 204)
+        Label9.Name = "Label9"
+        Label9.Size = New Size(71, 15)
+        Label9.TabIndex = 29
+        Label9.Text = "Lab Admin :"
+        ' 
+        ' AdminAsgn
+        ' 
+        AdminAsgn.FormattingEnabled = True
+        AdminAsgn.Location = New Point(525, 201)
+        AdminAsgn.Name = "AdminAsgn"
+        AdminAsgn.Size = New Size(200, 23)
+        AdminAsgn.TabIndex = 30
+        ' 
+        ' cnfmlab
+        ' 
+        cnfmlab.Location = New Point(552, 259)
+        cnfmlab.Name = "cnfmlab"
+        cnfmlab.Size = New Size(153, 23)
+        cnfmlab.TabIndex = 31
+        cnfmlab.Text = "Add Lab"
+        cnfmlab.UseVisualStyleBackColor = True
+        ' 
         ' AdminDashboard
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1230, 566)
+        Controls.Add(cnfmlab)
+        Controls.Add(AdminAsgn)
+        Controls.Add(Label9)
+        Controls.Add(Label8)
+        Controls.Add(s)
+        Controls.Add(Label5)
+        Controls.Add(cmbdept1)
         Controls.Add(Button2)
         Controls.Add(btnaddl)
         Controls.Add(Label7)
@@ -266,6 +340,7 @@ Partial Class AdminDashboard
         Controls.Add(btnAddUsers)
         Controls.Add(lblWelcome)
         Controls.Add(btnLogout)
+        FormBorderStyle = FormBorderStyle.Fixed3D
         Name = "AdminDashboard"
         Text = "AdminDashboard"
         CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
@@ -295,4 +370,11 @@ Partial Class AdminDashboard
     Friend WithEvents Label7 As Label
     Friend WithEvents btnaddl As Button
     Friend WithEvents Button2 As Button
+    Friend WithEvents cmbdept1 As ComboBox
+    Friend WithEvents Label5 As Label
+    Friend WithEvents s As TextBox
+    Friend WithEvents Label8 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents AdminAsgn As ComboBox
+    Friend WithEvents cnfmlab As Button
 End Class

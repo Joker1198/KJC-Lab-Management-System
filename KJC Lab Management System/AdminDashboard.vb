@@ -26,8 +26,6 @@ Public Class AdminDashboard
         ' Load departments to the ComboBox
         LoadDepartments()
 
-        ' Load classes to the ComboBox
-        cmbcls.Items.AddRange(LoadClasses().ToArray())
         ' Hide the controls initially
         HideControls("txtNewUsername", "txtNewPassword", "cmbNewRole", "btnConfirmAddUser", "Label1", "Label2", "Label3", "UserIDT", "Label4", "cmbcls", "cmbdept", "Label6", "Label5")
         HideControls("DataGridView1", "btnChangePassword", "btnChangeRole", "btnDeleteUser")
@@ -335,41 +333,8 @@ Public Class AdminDashboard
         End If
     End Sub
 
-    Private Function GetClassesForDepartment(departmentName As String) As List(Of String)
-        Dim classes As New List(Of String)()
-
-        Try
-            ' Connect to the database
-            Using connection As New MySqlConnection(Form1.connectionString)
-                connection.Open()
-
-                ' Get the DepartmentId for the selected department
-                Dim departmentId As Integer = GetDepartmentIdByName(departmentName)
-
-                ' Query to select class names based on DepartmentId
-                Dim query As String = "SELECT ClassName FROM Class WHERE DepartmentId = @DepartmentId"
-
-                ' Execute the query
-                Using cmd As New MySqlCommand(query, connection)
-                    cmd.Parameters.AddWithValue("@DepartmentId", departmentId)
-                    Using reader As MySqlDataReader = cmd.ExecuteReader()
-                        While reader.Read()
-                            ' Add class names to the list
-                            classes.Add(reader("ClassName").ToString())
-                        End While
-                    End Using
-                End Using
-            End Using
-        Catch ex As Exception
-            MessageBox.Show("Error loading class names: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-
-        Return classes
-    End Function
-
     Private Sub cmbdept_SelectedIndexChanged(sender As Object, e As EventArgs)
         ' Clear existing items in cmbcls
-        cmbcls.Items.Clear()
 
         ' Get the selected department
         Dim selectedDepartment = cmbdept.SelectedItem?.ToString
@@ -377,10 +342,6 @@ Public Class AdminDashboard
         ' If a department is selected, load corresponding classes
         If Not String.IsNullOrEmpty(selectedDepartment) Then
             ' Fetch classes for the selected department from the database
-            Dim classes = GetClassesForDepartment(selectedDepartment)
-
-            ' Add classes to cmbcls
-            cmbcls.Items.AddRange(classes.ToArray)
         End If
     End Sub
     Public Function GetDepartmentIdByName(departmentName As String) As Integer

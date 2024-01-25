@@ -38,8 +38,6 @@ Partial Class AdminDashboard
         btnChangeRole = New Button()
         Label4 = New Label()
         UserIDT = New TextBox()
-        Label5 = New Label()
-        cmbcls = New ComboBox()
         Label6 = New Label()
         cmbdept = New ComboBox()
         btnDeleteUser = New Button()
@@ -112,7 +110,7 @@ Partial Class AdminDashboard
         ' cmbNewRole
         ' 
         cmbNewRole.FormattingEnabled = True
-        cmbNewRole.Location = New Point(212, 257)
+        cmbNewRole.Location = New Point(212, 227)
         cmbNewRole.Name = "cmbNewRole"
         cmbNewRole.Size = New Size(200, 23)
         cmbNewRole.TabIndex = 7
@@ -120,7 +118,7 @@ Partial Class AdminDashboard
         ' Label3
         ' 
         Label3.AutoSize = True
-        Label3.Location = New Point(165, 260)
+        Label3.Location = New Point(165, 230)
         Label3.Name = "Label3"
         Label3.Size = New Size(41, 15)
         Label3.TabIndex = 8
@@ -128,7 +126,7 @@ Partial Class AdminDashboard
         ' 
         ' btnConfirmAddUser
         ' 
-        btnConfirmAddUser.Location = New Point(236, 302)
+        btnConfirmAddUser.Location = New Point(230, 281)
         btnConfirmAddUser.Name = "btnConfirmAddUser"
         btnConfirmAddUser.Size = New Size(153, 23)
         btnConfirmAddUser.TabIndex = 9
@@ -186,23 +184,6 @@ Partial Class AdminDashboard
         UserIDT.PlaceholderText = "Assign User Id"
         UserIDT.Size = New Size(200, 23)
         UserIDT.TabIndex = 15
-        ' 
-        ' Label5
-        ' 
-        Label5.AutoSize = True
-        Label5.Location = New Point(165, 226)
-        Label5.Name = "Label5"
-        Label5.Size = New Size(40, 15)
-        Label5.TabIndex = 18
-        Label5.Text = "Class :"
-        ' 
-        ' cmbcls
-        ' 
-        cmbcls.FormattingEnabled = True
-        cmbcls.Location = New Point(212, 223)
-        cmbcls.Name = "cmbcls"
-        cmbcls.Size = New Size(200, 23)
-        cmbcls.TabIndex = 17
         ' 
         ' Label6
         ' 
@@ -269,8 +250,6 @@ Partial Class AdminDashboard
         Controls.Add(btnDeleteUser)
         Controls.Add(Label6)
         Controls.Add(cmbdept)
-        Controls.Add(Label5)
-        Controls.Add(cmbcls)
         Controls.Add(Label4)
         Controls.Add(UserIDT)
         Controls.Add(btnChangeRole)
@@ -310,8 +289,6 @@ Partial Class AdminDashboard
     Friend WithEvents btnChangeRole As Button
     Friend WithEvents Label4 As Label
     Friend WithEvents UserIDT As TextBox
-    Friend WithEvents Label5 As Label
-    Friend WithEvents cmbcls As ComboBox
     Friend WithEvents Label6 As Label
     Friend WithEvents cmbdept As ComboBox
     Friend WithEvents btnDeleteUser As Button

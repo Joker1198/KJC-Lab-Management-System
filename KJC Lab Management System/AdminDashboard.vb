@@ -386,14 +386,9 @@ Public Class AdminDashboard
         ' Load existing Lab Admins into AdminAsgn ComboBox
         LoadLabAdminsIntoComboBox(AdminAsgn)
     End Sub
-    Private Sub cnfmlab_Click(sender As Object, e As EventArgs)
-        ' Call the method to confirm and add the lab
-        ConfirmAddLab()
-    End Sub
-
     Private Sub ConfirmAddLab()
         ' Get values from controls
-        Dim labName As String = labName
+        Dim labName As String = labName.Text
         Dim selectedDepartment As String = cmbdept1.SelectedItem?.ToString()
         Dim selectedLabAdmin As String = AdminAsgn.SelectedItem?.ToString()
 
@@ -436,6 +431,9 @@ Public Class AdminDashboard
             MessageBox.Show("Error adding lab: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
+
+
 
     Private Sub LoadDepartmentsIntoComboBox(comboBox As ComboBox)
         Try

@@ -46,7 +46,7 @@ Partial Class AdminDashboard
         Button2 = New Button()
         cmbdept1 = New ComboBox()
         Label5 = New Label()
-        s = New TextBox()
+        Lnae = New TextBox()
         Label8 = New Label()
         Label9 = New Label()
         AdminAsgn = New ComboBox()
@@ -263,13 +263,13 @@ Partial Class AdminDashboard
         Label5.TabIndex = 26
         Label5.Text = "Department :"
         ' 
-        ' s
+        ' Lnae
         ' 
-        s.Location = New Point(525, 140)
-        s.Name = "s"
-        s.PlaceholderText = "Assign Lab Name"
-        s.Size = New Size(200, 23)
-        s.TabIndex = 27
+        Lnae.Location = New Point(525, 140)
+        Lnae.Name = "Lnae"
+        Lnae.PlaceholderText = "Assign Lab Name"
+        Lnae.Size = New Size(200, 23)
+        Lnae.TabIndex = 27
         ' 
         ' Label8
         ' 
@@ -315,7 +315,7 @@ Partial Class AdminDashboard
         Controls.Add(AdminAsgn)
         Controls.Add(Label9)
         Controls.Add(Label8)
-        Controls.Add(s)
+        Controls.Add(Lnae)
         Controls.Add(Label5)
         Controls.Add(cmbdept1)
         Controls.Add(Button2)
@@ -372,7 +372,7 @@ Partial Class AdminDashboard
     Friend WithEvents Button2 As Button
     Friend WithEvents cmbdept1 As ComboBox
     Friend WithEvents Label5 As Label
-    Friend WithEvents s As TextBox
+    Friend WithEvents Lnae As TextBox
     Friend WithEvents Label8 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents AdminAsgn As ComboBox

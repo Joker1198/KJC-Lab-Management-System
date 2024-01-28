@@ -65,7 +65,7 @@ Partial Class Form1
         PictureBox1.BackgroundImageLayout = ImageLayout.None
         PictureBox1.BorderStyle = BorderStyle.FixedSingle
         PictureBox1.Image = My.Resources.Resources._353ffea43feb65208c9d5fd7c5f2d780__1_
-        PictureBox1.Location = New Point(81, 36)
+        PictureBox1.Location = New Point(63, 27)
         PictureBox1.Name = "PictureBox1"
         PictureBox1.Size = New Size(577, 87)
         PictureBox1.SizeMode = PictureBoxSizeMode.AutoSize

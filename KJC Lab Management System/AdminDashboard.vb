@@ -388,12 +388,12 @@ Public Class AdminDashboard
     End Sub
     Private Sub ConfirmAddLab()
         ' Get values from controls
-        Dim labName As String = labName.Text
+        Dim labNameValue As String = Lnae.Text
         Dim selectedDepartment As String = cmbdept1.SelectedItem?.ToString()
         Dim selectedLabAdmin As String = AdminAsgn.SelectedItem?.ToString()
 
         ' Validate input (you can add more validation as needed)
-        If String.IsNullOrEmpty(labName) OrElse String.IsNullOrEmpty(selectedDepartment) OrElse String.IsNullOrEmpty(selectedLabAdmin) Then
+        If String.IsNullOrEmpty(labNameValue) OrElse String.IsNullOrEmpty(selectedDepartment) OrElse String.IsNullOrEmpty(selectedLabAdmin) Then
             MessageBox.Show("Please fill in all fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
@@ -412,7 +412,7 @@ Public Class AdminDashboard
                 ' Insert the lab into the Lab table
                 Dim insertQuery As String = "INSERT INTO Lab (LabName, DepartmentId, LabAdminId) VALUES (@LabName, @DepartmentId, @LabAdminId)"
                 Using cmd As New MySqlCommand(insertQuery, connection)
-                    cmd.Parameters.AddWithValue("@LabName", labName)
+                    cmd.Parameters.AddWithValue("@LabName", labNameValue)
                     cmd.Parameters.AddWithValue("@DepartmentId", departmentId)
                     cmd.Parameters.AddWithValue("@LabAdminId", labAdminUserId)
                     cmd.ExecuteNonQuery()
@@ -431,6 +431,12 @@ Public Class AdminDashboard
             MessageBox.Show("Error adding lab: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
+
+    Private Sub cnfmlab_Click(sender As Object, e As EventArgs) Handles cnfmlab.Click
+        ConfirmAddLab()
+    End Sub
+
 
 
 

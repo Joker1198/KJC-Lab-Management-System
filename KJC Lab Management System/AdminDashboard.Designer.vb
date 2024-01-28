@@ -299,11 +299,11 @@ Partial Class AdminDashboard
         ' 
         ' cnfmlab
         ' 
-        cnfmlab.Location = New Point(552, 259)
+        cnfmlab.Location = New Point(545, 263)
         cnfmlab.Name = "cnfmlab"
         cnfmlab.Size = New Size(153, 23)
-        cnfmlab.TabIndex = 31
-        cnfmlab.Text = "Add Lab"
+        cnfmlab.TabIndex = 32
+        cnfmlab.Text = "Confirm And Add User"
         cnfmlab.UseVisualStyleBackColor = True
         ' 
         ' AdminDashboard

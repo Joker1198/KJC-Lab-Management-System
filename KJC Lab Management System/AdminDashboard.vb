@@ -29,12 +29,14 @@ Public Class AdminDashboard
         ' Hide the controls initially
         HideControls("txtNewUsername", "txtNewPassword", "cmbNewRole", "btnConfirmAddUser", "Label1", "Label2", "Label3", "UserIDT", "Label4", "cmbcls", "cmbdept", "Label6", "Label5")
         HideControls("DataGridView1", "btnChangePassword", "btnChangeRole", "btnDeleteUser")
+        HideControls("Label5", "cmbdept1", "Label8", "Lnae", "Label9", "AdminAsgn", "cnfmlab")
     End Sub
 
     Private Sub btnAddUsers_Click(sender As Object, e As EventArgs) Handles btnAddUsers.Click
         ' Show the controls for adding a new user
         ShowControls("txtNewUsername", "txtNewPassword", "cmbNewRole", "btnConfirmAddUser", "Label1", "Label2", "Label3", "UserIDT", "Label4", "cmbcls", "cmbdept", "Label6", "Label5")
         HideControls("DataGridView1", "btnChangePassword", "btnChangeRole", "btnDeleteUser")
+        HideControls("Label5", "cmbdept1", "Label8", "Lnae", "Label9", "AdminAsgn", "cnfmlab")
     End Sub
 
     Private Sub btnConfirmAddUser_Click(sender As Object, e As EventArgs) Handles btnConfirmAddUser.Click
@@ -47,6 +49,7 @@ Public Class AdminDashboard
             ' Display user data in the DataGridView
             HideControls("txtNewUsername", "txtNewPassword", "cmbNewRole", "btnConfirmAddUser", "Label1", "Label2", "Label3", "UserIDT", "Label4", "cmbcls", "cmbdept", "Label6", "Label5")
             ShowControls("DataGridView1", "btnChangePassword", "btnChangeRole", "btnDeleteUser")
+            HideControls("Label5", "cmbdept1", "Label8", "Lnae", "Label9", "AdminAsgn", "cnfmlab")
             LoadUserData()
         Catch ex As Exception
             MessageBox.Show("Error fetching user data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -106,7 +109,7 @@ Public Class AdminDashboard
 
             ' Hide the controls after adding a new user
             HideControls("txtNewUsername", "txtNewPassword", "cmbNewRole", "btnConfirmAddUser", "Label1", "Label2", "Label3", "UserIDT", "Label4", "cmbcls", "cmbdept", "Label6", "Label5")
-
+            HideControls("Label5", "cmbdept1", "Label8", "Lnae", "Label9", "AdminAsgn", "cnfmlab")
             ' Clear textboxes and ComboBox after adding a new user
             txtNewUsername.Clear()
             txtNewPassword.Clear()
@@ -379,8 +382,9 @@ Public Class AdminDashboard
 
     'From here we'll work on lab now
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnaddl.Click
-        HideControls("txtNewUsername", "txtNewPassword", "cmbNewRole", "btnConfirmAddUser", "Label1", "Label2", "Label3", "UserIDT", "Label4", "cmbcls", "cmbdept", "Label6", "Label5")
+        HideControls("txtNewUsername", "txtNewPassword", "cmbNewRole", "btnConfirmAddUser", "Label1", "Label2", "c", "UserIDT", "Label4", "cmbcls", "cmbdept", "Label6")
         HideControls("DataGridView1", "btnChangePassword", "btnChangeRole", "btnDeleteUser")
+        ShowControls("Label5", "cmbdept1", "Label8", "Lnae", "Label9", "AdminAsgn", "cnfmlab")
         LoadDepartmentsIntoComboBox(cmbdept1)
 
         ' Load existing Lab Admins into AdminAsgn ComboBox
@@ -522,4 +526,57 @@ Public Class AdminDashboard
 
         Return userId
     End Function
+    Private Sub vmlab_Click(sender As Object, e As EventArgs) Handles vmlab.Click
+        ' Hide specified controls
+        HideControls("txtNewUsername", "txtNewPassword", "cmbNewRole", "btnConfirmAddUser", "Label1", "Label2", "c", "UserIDT", "Label4", "cmbcls", "cmbdept", "Label6")
+        HideControls("btnChangePassword", "btnChangeRole", "btnDeleteUser")
+        HideControls("Label5", "cmbdept1", "Label8", "Lnae", "Label9", "AdminAsgn", "cnfmlab")
+
+        ' Show DataGridView
+        DataGridView1.Visible = True
+
+        ' Load and display lab details
+        LoadLabDataIntoDataGridView()
+    End Sub
+
+    Private Sub LoadLabDataIntoDataGridView()
+        Try
+            ' Fetch lab data from the database
+            Dim labData As DataTable = GetLabData()
+
+            ' Display the lab data in the DataGridView
+            DataGridView1.DataSource = labData
+        Catch ex As Exception
+            MessageBox.Show("Error fetching lab data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Function GetLabData() As DataTable
+        Dim labData As New DataTable()
+
+        Try
+            ' Connect to the database
+            Using connection As New MySqlConnection(Form1.connectionString)
+                connection.Open()
+
+                ' Query to select lab data
+                Dim query As String = "SELECT LabId, LabName, DepartmentId, LabAdminId FROM Lab"
+
+                ' LabView is a view that joins Lab, Department, and UserKJC to get lab details
+
+                ' Execute the query
+                Using cmd As New MySqlCommand(query, connection)
+                    Using adapter As New MySqlDataAdapter(cmd)
+                        ' Fill the DataTable with the results
+                        adapter.Fill(labData)
+                    End Using
+                End Using
+            End Using
+        Catch ex As Exception
+            Throw ex
+        End Try
+
+        Return labData
+    End Function
+
 End Class

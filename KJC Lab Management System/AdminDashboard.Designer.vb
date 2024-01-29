@@ -43,7 +43,7 @@ Partial Class AdminDashboard
         btnDeleteUser = New Button()
         Label7 = New Label()
         btnaddl = New Button()
-        Button2 = New Button()
+        vmlab = New Button()
         cmbdept1 = New ComboBox()
         Label5 = New Label()
         Lnae = New TextBox()
@@ -237,14 +237,14 @@ Partial Class AdminDashboard
         btnaddl.Text = "Add Lab"
         btnaddl.UseVisualStyleBackColor = True
         ' 
-        ' Button2
+        ' vmlab
         ' 
-        Button2.Location = New Point(35, 325)
-        Button2.Name = "Button2"
-        Button2.Size = New Size(90, 59)
-        Button2.TabIndex = 24
-        Button2.Text = "View/Manage Lab"
-        Button2.UseVisualStyleBackColor = True
+        vmlab.Location = New Point(35, 325)
+        vmlab.Name = "vmlab"
+        vmlab.Size = New Size(90, 59)
+        vmlab.TabIndex = 24
+        vmlab.Text = "View/Manage Lab"
+        vmlab.UseVisualStyleBackColor = True
         ' 
         ' cmbdept1
         ' 
@@ -318,7 +318,7 @@ Partial Class AdminDashboard
         Controls.Add(Lnae)
         Controls.Add(Label5)
         Controls.Add(cmbdept1)
-        Controls.Add(Button2)
+        Controls.Add(vmlab)
         Controls.Add(btnaddl)
         Controls.Add(Label7)
         Controls.Add(btnDeleteUser)
@@ -377,4 +377,5 @@ Partial Class AdminDashboard
     Friend WithEvents Label9 As Label
     Friend WithEvents AdminAsgn As ComboBox
     Friend WithEvents cnfmlab As Button
+    Friend WithEvents vmlab As Button
 End Class

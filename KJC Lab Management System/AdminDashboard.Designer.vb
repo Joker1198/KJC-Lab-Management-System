@@ -142,6 +142,7 @@ Partial Class AdminDashboard
         ' 
         ' DataGridView1
         ' 
+        DataGridView1.BackgroundColor = SystemColors.ControlLightLight
         DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         DataGridView1.Location = New Point(768, 63)
         DataGridView1.Name = "DataGridView1"

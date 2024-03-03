@@ -311,7 +311,7 @@ Partial Class AdminDashboard
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1230, 566)
+        ClientSize = New Size(1230, 418)
         Controls.Add(cnfmlab)
         Controls.Add(AdminAsgn)
         Controls.Add(Label9)

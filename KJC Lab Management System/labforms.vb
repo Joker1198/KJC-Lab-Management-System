@@ -3,48 +3,65 @@
 Public Class labforms
     ' Replace this with your actual connection string.
     Dim connectionString As String = "Server=127.0.0.1;Database=kjclab;User Id=root;Password=;"
-    Dim loggedInLabId As Integer ' Assuming you have a way to store the logged-in lab ID
+    Dim loggedInLabId As Integer = -1 ' Default value indicating no lab is logged in
 
     Private Sub labforms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Load lab booking requests for the logged-in lab into DataGridView1
+        ' Load lab data and lab booking requests for the logged-in lab admin
         LoadLabData()
     End Sub
 
+
     Private Sub LoadLabData()
-        ' Set the logged-in lab's ID
+        ' Set the logged-in lab's ID based on the logged-in admin's LabAdminId
         SetLoggedInLabId()
 
-        ' Load lab booking requests for the logged-in lab into DataGridView1
-        LoadLabBookingRequests()
-    End Sub
-
-    Private Sub SetLoggedInLabId()
-        ' Assuming you have a way to get the logged-in admin's lab ID, update loggedInLabId accordingly
-        ' For now, let's assume a default value of 1
-        loggedInLabId = 1
-    End Sub
-
-    Private Sub LoadLabBookingRequests()
-        ' Clear existing rows and columns in the DataGridView
-        DataGridView1.Rows.Clear()
-        DataGridView1.Columns.Clear()
-
         If loggedInLabId <> -1 Then
-            ' Get lab booking requests for the logged-in lab from the database
-            Dim requests As List(Of LabBookingRequest) = GetLabBookingRequests(loggedInLabId)
+            ' Load lab details (if needed) based on the logged-in lab admin
+            ' Add your logic to load lab details here
 
-            ' Add columns to the DataGridView based on LabBookingRequest properties
-            For Each prop As System.Reflection.PropertyInfo In GetType(LabBookingRequest).GetProperties()
-                DataGridView1.Columns.Add(prop.Name, prop.Name)
-            Next
-
-            ' Populate the DataGridView with the lab booking requests
-            For Each request As LabBookingRequest In requests
-                DataGridView1.Rows.Add(request.BookingRequestId, request.LabId, request.UserId, request.RequestDate, request.Status, request.CreatedAt, request.Materials)
-            Next
+            ' Load lab booking requests for the logged-in lab into DataGridView1
+            LoadLabBookingRequests()
         Else
             MessageBox.Show("Lab not recognized.")
         End If
+    End Sub
+
+    Private Sub SetLoggedInLabId()
+        ' Replace this with your logic to get the lab ID based on the logged-in admin's LabAdminId
+        ' For now, let's assume a default value of 1
+        ' You may need to fetch this value based on your authentication mechanism
+        loggedInLabId = 1
+    End Sub
+
+
+
+    Private Sub LoadLabBookingRequests()
+        ' Create a DataTable to hold the lab booking requests
+        Dim labBookingRequestsDataTable As New DataTable()
+
+        ' Get lab booking requests for the logged-in lab from the database
+        Dim requests As List(Of LabBookingRequest) = GetLabBookingRequests(loggedInLabId)
+
+        If requests.Count > 0 Then
+            ' Add columns to the DataTable based on LabBookingRequest properties
+            For Each prop As System.Reflection.PropertyInfo In GetType(LabBookingRequest).GetProperties()
+                labBookingRequestsDataTable.Columns.Add(prop.Name, prop.PropertyType)
+            Next
+
+            ' Populate the DataTable with the lab booking requests
+            For Each request As LabBookingRequest In requests
+                Dim row As DataRow = labBookingRequestsDataTable.NewRow()
+                For Each prop As System.Reflection.PropertyInfo In GetType(LabBookingRequest).GetProperties()
+                    row(prop.Name) = prop.GetValue(request)
+                Next
+                labBookingRequestsDataTable.Rows.Add(row)
+            Next
+        Else
+            MessageBox.Show("No lab booking requests found for the logged-in lab.", "No Requests", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+
+        ' Bind the DataTable to the DataGridView
+        DataGridView1.DataSource = labBookingRequestsDataTable
     End Sub
 
 
@@ -94,7 +111,53 @@ Public Class labforms
     End Class
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        ' Reload lab data when Button1 is clicked
-        LoadLabData()
+        ' Assuming the DataGridView1 is bound to a DataTable named labBookingRequestsDataTable
+        If DataGridView1.SelectedRows.Count > 0 Then
+            ' Get the selected lab booking request ID
+            Dim selectedRequestId As Integer = Convert.ToInt32(DataGridView1.SelectedRows(0).Cells("BookingRequestId").Value)
+
+            ' Update the status of the selected lab booking request to "Accepted"
+            UpdateBookingRequestStatus(selectedRequestId, "Accepted")
+
+            ' Reload lab booking requests into DataGridView
+            LoadLabBookingRequests()
+        Else
+            MessageBox.Show("Please select a lab booking request to accept.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
     End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        ' Assuming the DataGridView1 is bound to a DataTable named labBookingRequestsDataTable
+        If DataGridView1.SelectedRows.Count > 0 Then
+            ' Get the selected lab booking request ID
+            Dim selectedRequestId As Integer = Convert.ToInt32(DataGridView1.SelectedRows(0).Cells("BookingRequestId").Value)
+
+            ' Update the status of the selected lab booking request to "Declined"
+            UpdateBookingRequestStatus(selectedRequestId, "Declined")
+
+            ' Reload lab booking requests into DataGridView
+            LoadLabBookingRequests()
+        Else
+            MessageBox.Show("Please select a lab booking request to decline.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
+
+    Private Sub UpdateBookingRequestStatus(requestId As Integer, status As String)
+        ' Update the status of the lab booking request in the database
+        Using conn As New MySqlConnection(connectionString)
+            Using cmd As New MySqlCommand("UPDATE labbookingrequest SET Status = @Status WHERE BookingRequestId = @RequestId", conn)
+                cmd.Parameters.AddWithValue("@Status", status)
+                cmd.Parameters.AddWithValue("@RequestId", requestId)
+
+                Try
+                    conn.Open()
+                    cmd.ExecuteNonQuery()
+                    MessageBox.Show($"Lab booking request {requestId} has been {status}.", "Request Updated", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Catch ex As Exception
+                    MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            End Using
+        End Using
+    End Sub
+
 End Class

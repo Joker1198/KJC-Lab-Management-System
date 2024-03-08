@@ -41,21 +41,23 @@ Partial Class labforms
         ' 
         ' Button1
         ' 
+        Button1.BackColor = Color.Lime
         Button1.Location = New Point(12, 221)
         Button1.Name = "Button1"
         Button1.Size = New Size(101, 37)
         Button1.TabIndex = 2
-        Button1.Text = "Button1"
-        Button1.UseVisualStyleBackColor = True
+        Button1.Text = "Approve"
+        Button1.UseVisualStyleBackColor = False
         ' 
         ' Button2
         ' 
+        Button2.BackColor = Color.Red
         Button2.Location = New Point(12, 282)
         Button2.Name = "Button2"
         Button2.Size = New Size(101, 37)
         Button2.TabIndex = 3
-        Button2.Text = "Button2"
-        Button2.UseVisualStyleBackColor = True
+        Button2.Text = "Decline"
+        Button2.UseVisualStyleBackColor = False
         ' 
         ' TextBox1
         ' 
@@ -79,14 +81,14 @@ Partial Class labforms
         Button4.Name = "Button4"
         Button4.Size = New Size(101, 37)
         Button4.TabIndex = 9
-        Button4.Text = "Button4"
+        Button4.Text = "Add Materials"
         Button4.UseVisualStyleBackColor = True
         ' 
         ' labforms
         ' 
         AutoScaleDimensions = New SizeF(7.0F, 15.0F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(768, 485)
+        ClientSize = New Size(768, 343)
         Controls.Add(Button4)
         Controls.Add(Label1)
         Controls.Add(TextBox1)

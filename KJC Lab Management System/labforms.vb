@@ -25,12 +25,18 @@ Public Class labforms
     End Sub
 
     Private Sub LoadLabBookingRequests()
-        ' Clear existing rows in the DataGridView
+        ' Clear existing rows and columns in the DataGridView
         DataGridView1.Rows.Clear()
+        DataGridView1.Columns.Clear()
 
         If loggedInLabId <> -1 Then
             ' Get lab booking requests for the logged-in lab from the database
             Dim requests As List(Of LabBookingRequest) = GetLabBookingRequests(loggedInLabId)
+
+            ' Add columns to the DataGridView based on LabBookingRequest properties
+            For Each prop As System.Reflection.PropertyInfo In GetType(LabBookingRequest).GetProperties()
+                DataGridView1.Columns.Add(prop.Name, prop.Name)
+            Next
 
             ' Populate the DataGridView with the lab booking requests
             For Each request As LabBookingRequest In requests
@@ -40,6 +46,7 @@ Public Class labforms
             MessageBox.Show("Lab not recognized.")
         End If
     End Sub
+
 
     Private Function GetLabBookingRequests(labId As Integer) As List(Of LabBookingRequest)
         Dim labBookingRequests As New List(Of LabBookingRequest)()

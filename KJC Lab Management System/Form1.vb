@@ -3,6 +3,9 @@
 Public Class Form1
     Public Shared connectionString As String = "Server=127.0.0.1;Database=kjclab;User Id=root;Password=;"
 
+    ' Shared variable to store the logged-in user ID
+    Public Shared LoggedInUserId As Integer
+
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
         Dim username As String = txtUsername.Text
         Dim password As String = txtPassword.Text
@@ -10,6 +13,9 @@ Public Class Form1
             Dim roleId As String = GetUserRole(username, password)
 
             If roleId IsNot Nothing Then
+                ' Store the logged-in user ID
+                LoggedInUserId = Integer.Parse(username)
+
                 MessageBox.Show("Login Successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                 ' Redirect based on role
@@ -28,6 +34,7 @@ Public Class Form1
                     Case "3"
                         ' Redirect teacher to teacher dashboard
                         MessageBox.Show("Welcome Teacher!", "Dashboard", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        teachod.Show()
                         ' TODO: Redirect to teacher dashboard form
 
                     Case "4"

@@ -37,7 +37,7 @@ Partial Class Form1
         txtUsername.Location = New Point(239, 192)
         txtUsername.Name = "txtUsername"
         txtUsername.PlaceholderText = "Username"
-        txtUsername.Size = New Size(269, 23)
+        txtUsername.Size = New Size(248, 23)
         txtUsername.TabIndex = 0
         ' 
         ' txtPassword
@@ -46,7 +46,7 @@ Partial Class Form1
         txtPassword.Location = New Point(239, 252)
         txtPassword.Name = "txtPassword"
         txtPassword.PlaceholderText = "Password"
-        txtPassword.Size = New Size(269, 23)
+        txtPassword.Size = New Size(248, 23)
         txtPassword.TabIndex = 1
         ' 
         ' btnLogin
@@ -54,7 +54,7 @@ Partial Class Form1
         btnLogin.Anchor = AnchorStyles.Left Or AnchorStyles.Right
         btnLogin.Location = New Point(318, 314)
         btnLogin.Name = "btnLogin"
-        btnLogin.Size = New Size(97, 23)
+        btnLogin.Size = New Size(76, 23)
         btnLogin.TabIndex = 2
         btnLogin.Text = "Sign-in"
         btnLogin.UseVisualStyleBackColor = True
@@ -65,7 +65,7 @@ Partial Class Form1
         PictureBox1.BackgroundImageLayout = ImageLayout.None
         PictureBox1.BorderStyle = BorderStyle.FixedSingle
         PictureBox1.Image = My.Resources.Resources._353ffea43feb65208c9d5fd7c5f2d780__1_
-        PictureBox1.Location = New Point(63, 27)
+        PictureBox1.Location = New Point(52, 27)
         PictureBox1.Name = "PictureBox1"
         PictureBox1.Size = New Size(577, 87)
         PictureBox1.SizeMode = PictureBoxSizeMode.AutoSize
@@ -100,7 +100,7 @@ Partial Class Form1
         AutoScaleMode = AutoScaleMode.Font
         BackgroundImage = My.Resources.Resources.clg_history__7_
         BackgroundImageLayout = ImageLayout.Stretch
-        ClientSize = New Size(784, 461)
+        ClientSize = New Size(763, 461)
         Controls.Add(Label2)
         Controls.Add(Label3)
         Controls.Add(PictureBox1)

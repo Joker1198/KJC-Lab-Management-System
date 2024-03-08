@@ -29,6 +29,8 @@ Partial Class teachod
         Button1 = New Button()
         Label5 = New Label()
         Label1 = New Label()
+        ComboBox2 = New ComboBox()
+        Label2 = New Label()
         SuspendLayout()
         ' 
         ' VmUser
@@ -59,14 +61,17 @@ Partial Class teachod
         ' 
         ' DateTimePicker1
         ' 
+        DateTimePicker1.Format = DateTimePickerFormat.Short
         DateTimePicker1.Location = New Point(180, 107)
+        DateTimePicker1.MaxDate = New Date(2024, 12, 31, 0, 0, 0, 0)
+        DateTimePicker1.MinDate = New Date(2024, 1, 1, 0, 0, 0, 0)
         DateTimePicker1.Name = "DateTimePicker1"
-        DateTimePicker1.Size = New Size(200, 23)
+        DateTimePicker1.Size = New Size(109, 23)
         DateTimePicker1.TabIndex = 28
         ' 
         ' Button1
         ' 
-        Button1.Location = New Point(216, 153)
+        Button1.Location = New Point(180, 194)
         Button1.Name = "Button1"
         Button1.Size = New Size(116, 23)
         Button1.TabIndex = 29
@@ -91,11 +96,30 @@ Partial Class teachod
         Label1.TabIndex = 31
         Label1.Text = "Select Date"
         ' 
+        ' ComboBox2
+        ' 
+        ComboBox2.FormattingEnabled = True
+        ComboBox2.Location = New Point(180, 158)
+        ComboBox2.Name = "ComboBox2"
+        ComboBox2.Size = New Size(200, 23)
+        ComboBox2.TabIndex = 32
+        ' 
+        ' Label2
+        ' 
+        Label2.AutoSize = True
+        Label2.Location = New Point(180, 140)
+        Label2.Name = "Label2"
+        Label2.Size = New Size(100, 15)
+        Label2.TabIndex = 33
+        Label2.Text = "Request Materials"
+        ' 
         ' teachod
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(549, 229)
+        Controls.Add(Label2)
+        Controls.Add(ComboBox2)
         Controls.Add(Label1)
         Controls.Add(Label5)
         Controls.Add(Button1)
@@ -116,4 +140,6 @@ Partial Class teachod
     Friend WithEvents Button1 As Button
     Friend WithEvents Label5 As Label
     Friend WithEvents Label1 As Label
+    Friend WithEvents ComboBox2 As ComboBox
+    Friend WithEvents Label2 As Label
 End Class

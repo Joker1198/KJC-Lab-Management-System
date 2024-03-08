@@ -53,7 +53,7 @@ Partial Class labforms
         ' 
         ' Button2
         ' 
-        Button2.Location = New Point(161, 246)
+        Button2.Location = New Point(153, 246)
         Button2.Name = "Button2"
         Button2.Size = New Size(101, 37)
         Button2.TabIndex = 3

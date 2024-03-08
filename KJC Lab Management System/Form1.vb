@@ -29,8 +29,7 @@ Public Class Form1
                     Case "2"
                         ' Redirect lab admin to lab admin dashboard
                         MessageBox.Show("Welcome Lab Admin!", "Dashboard", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                        ' TODO: Redirect to lab admin dashboard form
-
+                        labforms.Show()
                     Case "3"
                         ' Redirect teacher to teacher dashboard
                         MessageBox.Show("Welcome Teacher!", "Dashboard", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -38,15 +37,9 @@ Public Class Form1
                         ' TODO: Redirect to teacher dashboard form
 
                     Case "4"
-                        ' Redirect student to student dashboard
-                        MessageBox.Show("Welcome Student!", "Dashboard", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                        ' TODO: Redirect to student dashboard form
-
-                    Case "5"
                         ' Redirect HOD to HOD dashboard
                         MessageBox.Show("Welcome HOD!", "Dashboard", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                        ' TODO: Redirect to HOD dashboard form
-
+                        teachod.Show()
                     Case Else
                         MessageBox.Show("Unknown role", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End Select

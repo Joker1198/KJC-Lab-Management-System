@@ -71,7 +71,7 @@ Partial Class teachod
         ' 
         ' Button1
         ' 
-        Button1.Location = New Point(180, 194)
+        Button1.Location = New Point(225, 194)
         Button1.Name = "Button1"
         Button1.Size = New Size(116, 23)
         Button1.TabIndex = 29
@@ -117,7 +117,7 @@ Partial Class teachod
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(549, 229)
+        ClientSize = New Size(527, 229)
         Controls.Add(Label2)
         Controls.Add(ComboBox2)
         Controls.Add(Label1)
